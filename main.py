@@ -1,11 +1,8 @@
+import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, InlineQueryHandler, Filters
 from telegram import InlineQueryResultArticle, InputTextMessageContent
-from configparser import ConfigParser
 
-# Ref: http://fygul.blogspot.com/2017/07/configparser.html
-cfg = ConfigParser()
-cfg.read('config.ini')
-token = cfg['token']['key']
+token = os.environ.get("TOKEN", None)
 
 updater = Updater(token=token, use_context=True)
 dispatcher = updater.dispatcher
@@ -58,8 +55,9 @@ unknown_handler = MessageHandler(Filters.command, unknown)
 dispatcher.add_handler(unknown_handler)
 
 # To start the bot
-updater.start_polling()
-print("The bot is working.")
+if __name__ == '__main__':
+    updater.start_polling()
+    print("The bot is working.")
 
 # To end the bot
 updater.idle()
