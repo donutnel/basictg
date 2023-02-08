@@ -1,7 +1,6 @@
 import logging
 import telegram
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
+from telegram.ext import Updater, CommandHandler
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -9,25 +8,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-# Define the callback function for the buttons
-def button(update, context):
-    query = update.callback_query
-    query.answer()
-
-    # Check which button was clicked
-    if query.data == 'latest_video':
-        text = 'Here is the link to the latest video on Nostavid: https://www.youtube.com/watch?v=aj8wKXQsqUQ'
-        context.bot.send_message(chat_id=query.message.chat_id, text=text)
-    elif query.data == 'subscribe':
-        text = 'Click here to subscribe to nostavideos on YouTube: https://www.youtube.com/@nostavideos'
-        context.bot.send_message(chat_id=query.message.chat_id, text=text)
-
-# Define the menu command
-def menu(update, context):
-    keyboard = [[InlineKeyboardButton("Latest Video", callback_data='latest_video')],
-                [InlineKeyboardButton("Subscribe", callback_data='subscribe')]]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text('Please choose:', reply_markup=reply_markup)
+def start(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Hello")
 
 def main():
     # Get the bot token from the environment variable
@@ -39,11 +21,8 @@ def main():
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
-    # Add the menu command handler
-    dp.add_handler(CommandHandler('menu', menu))
-
-    # Add the callback query handler
-    dp.add_handler(CallbackQueryHandler(button))
+    # Add the start command handler
+    dp.add_handler(CommandHandler('start', start))
 
     # Start the bot
     updater.start_polling()
