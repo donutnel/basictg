@@ -1,2 +1,2 @@
 python-telegram-bot==12.8
-tronapi==3.1.6 # (ou la dernière version disponible)
+tron==1.6.1 # (ou la dernière version disponible)
