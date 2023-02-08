@@ -2,7 +2,7 @@ import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, InlineQueryHandler, Filters
 from telegram import InlineQueryResultArticle, InputTextMessageContent
 
-token = os.environ.get("TOKEN", None)
+token = os.environ.get("BOT_TOKEN", None)
 
 updater = Updater(token=token, use_context=True)
 dispatcher = updater.dispatcher
