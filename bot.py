@@ -1,3 +1,4 @@
+import os
 import logging
 from telegram import ParseMode
 from telegram.ext import (
@@ -13,7 +14,7 @@ from utils import handlers
 # Ajoutez un niveau de journalisation approprié pour Heroku
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=logging.WARNING,
+    level=logging.INFO,
 )
 
 # Ajoutez un nom de fichier significatif pour la persistence
@@ -68,5 +69,6 @@ dispatcher.add_handler(CommandHandler("bot", handlers.set_status))
 dispatcher.add_handler(conv_handler)
 
 #Démarrez le bot
-updater.start_polling()
-updater.idle()
+if __name__ == "__main__":
+    updater.start_polling()
+    updater.idle()
