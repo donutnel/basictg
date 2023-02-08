@@ -30,7 +30,7 @@ def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 def main():
-    token = os.environ.get('TOKEN')
+    token = os.environ.get('BOT_TOKEN')
 
     updater = Updater(token, use_context=True)
 
