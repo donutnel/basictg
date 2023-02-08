@@ -1,4 +1,5 @@
 import logging
+import os
 import telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from tronapi import Tron
@@ -29,7 +30,7 @@ def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 def main():
-    token = "5852766319:AAFJLw-NKobFaE2Qq12CDRxeAuu000jZTjE"
+    token = os.environ.get('TOKEN')
 
     updater = Updater(token, use_context=True)
 
