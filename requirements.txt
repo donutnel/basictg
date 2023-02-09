@@ -1,2 +1,2 @@
-python-telegram-bot
-configparser
+python-telegram-bot==20.0
+configparser==5.3.0
